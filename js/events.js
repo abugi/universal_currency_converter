@@ -5,7 +5,7 @@ const selectOptions = Array.from(document.querySelectorAll('.convert__currency-l
  Map through the selectOptions filled to populate based on user selected currency
 */
 selectOptions.map(currencyList => {
-    currencyList.addEventListener('change', function () {
+    currencyList.addEventListener('change', () => {
         convertCurrency();
     });
 });
