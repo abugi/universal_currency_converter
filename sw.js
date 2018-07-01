@@ -1,4 +1,4 @@
-let staticCacheName = 'currency-converter-static-v12';
+let staticCacheName = 'currency-converter-static-v13';
 let imagesCacheName = 'currency-converter-images';
 
 let cacheNames = [
