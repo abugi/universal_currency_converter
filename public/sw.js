@@ -1,0 +1,39 @@
+let staticCacheName = 'currency-converter-static-v7';
+let imagesCacheName = 'currency-converter-images';
+
+let cacheNames = [
+    staticCacheName,
+    imagesCacheName
+];
+
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(staticCacheName).then(cache => {
+            cache.addAll([
+                './',
+                './sw.js',
+                './js/controller.js',
+                './js/events.js',
+                './css/bootstrap.min.css',
+                './css/style.css',
+                './js/idb.js',
+                'https://fonts.googleapis.com/css?family=Lato:100,300,400,500',
+                'https://fonts.gstatic.com/s/lato/v14/S6uyw4BMUTPHjx4wXg.woff2'
+            ]);
+        })
+    );
+});
+
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.open(staticCacheName).then(cache => {
+            return cache.match(event.request.url).then(response => {
+                if (response) {
+                    return response;
+                }
+                // If no item matched in cache, attempt fetching from network
+                return fetch(event.request);
+            });
+        })
+    );
+});
